@@ -24,9 +24,15 @@ from copy import copy, deepcopy
 #
 # Replace the pass statement with your implementation.
 
-class ParentClass:
-    pass
+class Employee:
+    company = "Google"
 
+    def __init__(self, name, employee_id):
+        self.name = name
+        self.employee_id = employee_id
+
+    def display_info(self):
+        print(f"Employee {self.name}, ID: {self.employee_id}, Company: {self.company}")
 
 # TODO 2:
 # Create a child class that inherits from the parent class.
@@ -40,8 +46,20 @@ class ParentClass:
 #
 # Replace the pass statement with your implementation.
 
-class ChildClass(ParentClass):
-    pass
+class Manager(Employee):
+    department_type = "Management"
+
+    def __init__(self, name, employee_id, department, personnel):
+        super().__init__(name, employee_id)
+
+        self.department = department
+        self.personnel = personnel
+
+    def manage_team(self):
+        print(f"{self.name} manages {self.department} team.")
+
+    def display_info(self):
+        print(f"Manager Name: {self.name}, Employee ID: {self.employee_id}, Department: {self.department}, Personnel: {self.personnel}, Company: {self.company}")
 
 
 # TODO 3:
@@ -59,6 +77,30 @@ def demonstrate_namespaces():
     print("\n=== Namespace Demonstration ===")
     print("TODO: Implement namespace demonstration")
 
+    manager1 = Manager("Alice", "EMP002", "Human Resources", 5)
+    manager2 = Manager("Bob", "EMP003", "IT", 3)
+
+    print("Manager at company:", Manager.company)
+
+    print("Manager 1 Company:", manager1.company)
+
+    manager1.office_location = "Floor 3"
+
+    print("Manager 1 Namespace:")
+    print(manager1.__dict__)
+    print("Manager 2 Namespace:")
+    print(manager2.__dict__)
+
+    print("Employee class namespace:")
+    print(Employee.__dict__)
+    print("Manager class namespace:")
+    print(Manager.__dict__)
+    print("Manager 1 Information:")
+    print(manager1.display_info())
+    print("Manager 2 Information:")
+    print(manager2.display_info())
+    print("Manager 1 Additional Information:")
+    print(manager1.manage_team())
 
 # TODO 4:
 # Create a function that demonstrates shallow copying and deep copying.
@@ -74,7 +116,22 @@ def demonstrate_namespaces():
 def demonstrate_copying():
     print("\n=== Copy Demonstration ===")
     print("TODO: Implement shallow copy and deep copy demonstration")
+    original_employee = {"Name": "Charlie", "Employee": "EMP005", "Skills": {"Technical": ["Python", "SQL"], "Soft": ["Communication", "Networking"]}}
 
+    shallow_copy = copy(original_employee)
+    deep_copy = deepcopy(original_employee)
+
+    original_employee["Skills"]["Technical"].append("Java")
+
+    print("Original employee copy:")
+    print(original_employee)
+    print("Shallow copy:")
+    print(shallow_copy)
+    print("Deep copy:")
+    print(deep_copy)
+
+    """In Shallow copy, you create a new object but can add items(elements) while referencing the original list,
+    whereas in Deep copy it duplicates the original object only."""
 
 # TODO 5:
 # Complete the main function.
@@ -88,14 +145,21 @@ def demonstrate_copying():
 
 def main():
     print("=== Unit 1 OOP Assignment ===")
-
     print("\nTODO: Create and test your parent object")
 
+    print("Employee object: ")
+    employee = Employee("David", "EMP001")
+    employee.display_info()
     print("\nTODO: Create and test your child object")
+    print("Manager object: ")
+    manager = Manager("Emma", "EMP006", "Salary", 6)
+
+    print(manager.display_info())
+
+    print(manager.manage_team())
 
     demonstrate_namespaces()
     demonstrate_copying()
-
 
 if __name__ == "__main__":
     main()
