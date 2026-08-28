@@ -26,5 +26,13 @@ After completing the programming assignment, add this reflection to your initial
 Your reflection should be approximately 150–200 words and address the following questions:
 
 1. What concepts or skills did you learn while completing this assignment?
+During this unit, I learned more about different ways to alter lists by removing and adding at specific indexes.
+I was able to do searches on lists as well and look for values in and not in the list.
 2. What challenges did you encounter, and how did you overcome them?
+One of the challenges was to be able to understand more how to handle invalid indexes without causing an error.
+I had to go back and modify my code when running in order to test the beginning, middle and end positions. 
 3. How do list operations impact performance in real-world applications?
+Depending on where you are inserting or deleting in a list, list operations affect performance as it might shift
+elements. This matters on large systems or lists as searching can take longer as the value or item could be at
+the end of the list or if it's absent as it searching the whole list. That brings up that choosing the best
+data structures helps programs stay efficient especially as your data grows.

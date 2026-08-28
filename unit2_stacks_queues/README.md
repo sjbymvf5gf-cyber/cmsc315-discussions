@@ -41,4 +41,4 @@ and going back and forth helped me more in identifying and correcting errors.
 3. Explain the differences between stacks and queues as this relates to real-world applications.
 Stacks is mostly related to LIFO while queues use FIFO. In real-world, an example for stacks is a browser's 
 Back button handling the most recently visited page first while for queues a good example would be
-printer jobs, were the the first job submitted is the first to be processed.
+printer jobs, were the first job submitted is the first to be processed.
