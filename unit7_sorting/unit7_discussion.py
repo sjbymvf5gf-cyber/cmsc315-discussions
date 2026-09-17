@@ -28,7 +28,21 @@ def bubble_sort(lst):
     - Add meaningful comments.
 
     """
-    pass
+    sorted_list = lst.copy()
+
+    for pass_number in range(len(sorted_list) - 1):
+        swapped = False
+
+        for index in range(len(sorted_list) - 1 - pass_number):
+            if sorted_list[index] > sorted_list[index + 1]:
+                sorted_list[index], sorted_list[index + 1] = (
+                    sorted_list[index + 1], sorted_list[index]
+                )
+                swapped = True
+        if not swapped:
+            break
+
+    return sorted_list
 
 
 def merge_sort(lst):
@@ -45,7 +59,17 @@ def merge_sort(lst):
     - Add meaningful comments.
 
     """
-    pass
+    if len(lst) <= 1:
+        return lst.copy()
+
+    middle = len(lst) // 2
+    left_half = lst[:middle]
+    right_half = lst[middle:]
+
+    sorted_left_half = merge_sort(left_half)
+    sorted_right_half = merge_sort(right_half)
+
+    return merge(sorted_left_half, sorted_right_half)
 
 
 def merge(left, right):
@@ -60,7 +84,22 @@ def merge(left, right):
     - Return the merged sorted list.
     - Add meaningful comments.
     """
-    pass
+    result = []
+    left_index = 0
+    right_index = 0
+
+    while left_index < len(left) and right_index < len(right):
+        if left[left_index] <= right[right_index]:
+            result.append(left[left_index])
+            left_index += 1
+        else:
+            result.append(right[right_index])
+            right_index += 1
+
+    result.extend(left[left_index:])
+    result.extend(right[right_index:])
+
+    return result
 
 
 def main():
@@ -80,6 +119,12 @@ def main():
     print("\n=== DATASET #1 ===")
     print("TODO: Create an unsorted dataset and test both sorting algorithms.")
 
+    dataset_1 = [42, 17, 89, 3, 56, 24, 71]
+
+    print(f"Dataset 1: {dataset_1}")
+    print(f"Bubble Sort: {bubble_sort(dataset_1)}")
+    print(f"Merge Sort: {merge_sort(dataset_1)}")
+
     # ===============================
     # TODO (Student): DATASET #2
     # ===============================
@@ -92,6 +137,12 @@ def main():
 
     print("\n=== DATASET #2 ===")
     print("TODO: Create a second dataset and compare sorting results.")
+
+    dataset_2 = [105, 12, 78, 33, 91, 66, 27]
+
+    print(f"Dataset 2: {dataset_2}")
+    print(f"Bubble Sort: {bubble_sort(dataset_2)}")
+    print(f"Merge Sort: {merge_sort(dataset_2)}")
 
     # ===============================
     # TODO (Student): EDGE CASES
@@ -109,10 +160,19 @@ def main():
     # Explain what happens in each case.
 
     print("\n=== EDGE CASE TESTS ===")
-    print("TODO: Demonstrate and explain edge cases.")
+    print("TODO: Demonstrate and explain edge cases.\n")
 
+    sorted_list = [1, 2, 3, 4, 5, 6, 7]
+    print(f"Edge Case #1")
+    print(f"Already sorted list: {sorted_list}")
+    print(f"Bubble Sort: {bubble_sort(sorted_list)}")
+    print(f"Merge Sort: {merge_sort(sorted_list)}")
 
-
+    duplicate_values = [7, 3, 7, 11, 5, 9]
+    print(f"\nEdge Case #2")
+    print(f"Duplicate values list: {duplicate_values}")
+    print(f"Bubble Sort: {bubble_sort(duplicate_values)}")
+    print(f"Merge Sort: {merge_sort(duplicate_values)}")
 
 if __name__ == "__main__":
     main()
