@@ -32,8 +32,22 @@ def bfs(graph, start):
     - Why neighbors are added to the queue.
     - How BFS differs from depth-first traversal.
     """
+    if start not in graph:
+        return []
+    visited = {start}
 
-    pass
+    queue = deque([start])
+
+    traversal_order = []
+
+    while queue:
+        current_node = queue.popleft()
+        traversal_order.append(current_node)
+        for neighbor in graph[current_node]:
+            if neighbor not in visited:
+                visited.add(neighbor)
+                queue.append(neighbor)
+    return traversal_order
 
 
 def main():
@@ -53,6 +67,17 @@ def main():
     print("\n=== GRAPH STRUCTURE ===")
     print("TODO: Create and display a graph.")
 
+    campus_graph = {
+        "Library": ["Science Hall", "Student Center"],
+        "Science Hall": ["Library", "Gym", "Computer Lab"],
+        "Student Center": ["Library", "Cafeteria"],
+        "Gym": ["Science Hall", "Cafeteria"],
+        "Computer Lab": ["Science Hall"],
+        "Cafeteria": ["Student Center", "Gym"]
+    }
+    print("Campus graph:")
+    for building, neighbors in campus_graph.items():
+        print(f"{building}: {neighbors}")
     # ===============================
     # TODO (Student): BFS TRAVERSAL
     # ===============================
@@ -67,6 +92,22 @@ def main():
 
     print("\n=== BFS TRAVERSAL ===")
     print("TODO: Perform and explain BFS traversal.")
+
+    starting_building = "Library"
+
+    traversal = bfs(campus_graph, starting_building)
+
+    print(f"Starting building: {starting_building}")
+    print(f"BFS traversal: {traversal}")
+
+    campus_graph["Engineering Hall"] = ["Computer Lab"]
+    campus_graph["Computer Lab"].append("Engineering Hall")
+
+    new_traversal = bfs(campus_graph, starting_building)
+
+    print(f"Updated graph: Added Engineering Hall")
+    print(f"Updated BFS traversal: {new_traversal}")
+
 
     # ===============================
     # TODO (Student): EDGE CASES
@@ -84,8 +125,15 @@ def main():
     # Explain what happens in each case.
 
     print("\n=== EDGE CASE TESTS ===")
-    print("TODO: Demonstrate and explain edge cases.")
+    print("TODO: Demonstrate and explain edge cases.\n")
 
+    print("Edge Case #1: Starting BFS from different node.")
+    gym_traversal = bfs(campus_graph, "Gym")
+    print(f"Starting from Gym: {gym_traversal}\n")
+
+    print("Edge Case #2: Start BFS from node not in graph./n")
+    missing_node = bfs(campus_graph, "Parking Lot")
+    print(f"Starting from missing node Parking Lot: {missing_node}")
 
 
 if __name__ == "__main__":
